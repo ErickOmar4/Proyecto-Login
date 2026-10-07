@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <!-- Evita mostrar el sistema sin haber iniciado sesión -->
+  <script>if (!sessionStorage.getItem('sesion')) location.replace('login.html');</script>
+  <!-- Componentes visuales (modal) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ErickOmar4/Componente_Visual@main/css/libreriaV.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" aria-label="Menú principal">
+    <div class="marca"><img src="img/logo.svg" alt=""> Sistema</div>
+    <nav>
+      <a href="#inicio" class="menu-enlace activo" data-vista="inicio">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg> Inicio
+      </a>
+
+      <details class="grupo-menu">
+        <summary class="menu-enlace">
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.7a3.5 3.5 0 010 6.6M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>
+          Usuarios
+          <svg class="icono flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="submenu">
+          <a href="#captura" data-vista="captura">Captura</a>
+        </div>
+      </details>
+    </nav>
+  </aside>
+  <div class="fondo-menu"></div>
+
+  <div class="contenido">
+    <!-- Navbar -->
+    <header class="navbar">
+      <button class="boton boton-borde boton-menu" type="button" aria-label="Abrir o cerrar el menú">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <div class="usuario">
+        <button class="usuario-boton" type="button" aria-haspopup="true" aria-expanded="false">
+          <img src="img/avatar.svg" alt="">
+          <span class="usuario-nombre">Usuario</span>
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="usuario-menu" hidden>
+          <p class="usuario-correo"></p>
+          <hr>
+          <button class="usuario-salir" type="button">
+            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H5v16h4M16 8l4 4-4 4M20 12H9"/></svg>
+            Salir del sistema
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="principal">
+      <!-- Vista: Inicio -->
+      <section data-seccion="inicio">
+        <h1>Hola, <span class="saludo-nombre"></span></h1>
+        <p class="texto-suave">Abre Usuarios y entra a Captura para registrar usuarios y alumnos.</p>
+        <div class="rejilla">
+          <div class="tarjeta"><div class="cifra total-usuarios">0</div><div class="texto-suave">Usuarios capturados</div></div>
+          <div class="tarjeta"><div class="cifra total-alumnos">0</div><div class="texto-suave">Alumnos registrados</div></div>
+        </div>
+      </section>
+
+      <!-- Vista: Captura -->
+      <section data-seccion="captura" hidden>
+        <h1>Captura</h1>
+        <div class="dos-columnas">
+          <!-- Formulario de usuarios -->
+          <div class="tarjeta">
+            <h2>Nuevo usuario</h2>
+            <form class="form-usuario" novalidate>
+              <label class="campo">
+                <span class="campo-titulo">Nombre de usuario</span>
+                <input class="control" type="text" name="usuario" autocomplete="off">
+                <small class="error"></small>
+              </label>
+              <label class="campo">
+                <span class="campo-titulo">Correo electrónico</span>
+                <input class="control" type="email" name="correo" autocomplete="off">
+                <small class="error"></small>
+              </label>
+              <label class="campo">
+                <span class="campo-titulo">Contraseña</span>
+                <input class="control" type="password" name="password" autocomplete="new-password">
+                <small class="error"></small>
+              </label>
+              <button type="submit" class="boton boton-marca">Guardar usuario</button>
+            </form>
+            <div class="tabla-scroll">
+              <table class="tabla">
+                <thead><tr><th>Usuario</th><th>Correo</th></tr></thead>
+                <tbody class="lista-usuarios"><tr><td colspan="2" class="texto-suave">Aún no hay usuarios. Captura el primero con el formulario.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Formulario de alumnos -->
+          <div class="tarjeta">
+            <h2>Nuevo alumno</h2>
+            <form class="form-alumno" novalidate>
+              <label class="campo">
+                <span class="campo-titulo">Nombre completo</span>
+                <input class="control" type="text" name="nombre" autocomplete="off">
+                <small class="error"></small>
+              </label>
+              <label class="campo">
+                <span class="campo-titulo">Número de control</span>
+                <input class="control" type="text" name="control" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="6 dígitos">
+                <small class="error"></small>
+              </label>
+              <label class="campo">
+                <span class="campo-titulo">Fecha de nacimiento</span>
+                <input class="control" type="date" name="nacimiento">
+                <small class="error"></small>
+              </label>
+              <button type="submit" class="boton boton-marca">Guardar y ver edad</button>
+            </form>
+            <div class="tabla-scroll">
+              <table class="tabla">
+                <thead><tr><th>Control</th><th>Alumno</th><th>Edad</th></tr></thead>
+                <tbody class="lista-alumnos"><tr><td colspan="3" class="texto-suave">Aún no hay alumnos. Registra el primero con el formulario.</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Validaciones (librería normal) y componentes visuales (modal) -->
+  <script src="https://cdn.jsdelivr.net/gh/ErickOmar4/utileria2.js@main/js/utileria.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ErickOmar4/Componente_Visual@main/js/librerIaV.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

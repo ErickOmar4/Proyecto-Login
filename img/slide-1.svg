@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Captura de usuarios">
+  <defs><linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f6f64"/><stop offset="1" stop-color="#17302f"/></linearGradient></defs>
+  <rect width="800" height="450" fill="url(#fondo)"/>
+  <circle cx="660" cy="80" r="120" fill="#f2b134" opacity=".15"/>
+  <rect x="210" y="90" width="380" height="230" rx="18" fill="#eef1f0"/>
+  <circle cx="290" cy="165" r="36" fill="#17302f"/>
+  <path d="M240 280c6-34 30-50 50-50s44 16 50 50z" fill="#17302f"/>
+  <rect x="370" y="140" width="170" height="16" rx="8" fill="#1f6f64"/>
+  <rect x="370" y="175" width="130" height="12" rx="6" fill="#b9d0cb"/>
+  <rect x="370" y="205" width="150" height="12" rx="6" fill="#b9d0cb"/>
+  <rect x="370" y="250" width="90" height="30" rx="8" fill="#f2b134"/>
+  <text x="60" y="400" font-family="system-ui, sans-serif" font-size="30" font-weight="700" fill="#fff">Captura de usuarios</text>
+</svg>
