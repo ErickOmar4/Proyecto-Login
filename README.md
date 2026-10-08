@@ -115,20 +115,67 @@ En la parte derecha se muestra el avatar y el nombre del usuario que inició ses
 
 ![Navbar](img/capturas/03-navbar.png)
 
-### 4. Captura de usuarios
 
+### 4. Captura de usuarios
+![alt text](img/readme/vista_programa.png)
+
+
+Se accede desde el sidebar: **Usuarios → Captura**. El formulario "Nuevo usuario" pide tres datos y valida cada uno con `utileria.js`: el cual usamos mediante el link del cdn
+
+![alt text](img/readme/vista_programa.png)
+
+| Campo | Regla | Función usada |
+|---|---|---|
+| Nombre de usuario | Entre 3 y 20 caracteres | `contarCaracteres` |
+| Correo electrónico | Formato `nombre@dominio.com` | `validarCorreo` |
+| Contraseña | Mínimo 8 caracteres, con mayúscula, minúscula, número y un símbolo (`@$!%*?&.#_-`) | `validarPassword` |
+
+- Cada campo se marca en verde si es válido o en rojo con su mensaje de error debajo.
+
+![alt text](img/readme/registro_incorrecto.png)
+
+- Si los tres datos son válidos, el usuario se agrega a la tabla "Usuarios", el contador de la pantalla de Inicio aumenta y el formulario se limpia.
+- Los datos viven solo en memoria: al recargar la página se pierden (no hay backend).
+![alt text](img/readme/registro_valido.png)
 
 ### 5. Número de control
 
+Está en el formulario "Nuevo alumno", junto al nombre y la fecha de nacimiento.
+
+![alt text](img/readme/f_nuevoAlumno.png)
+- Debe tener **exactamente 6 dígitos**: se valida con `solo_numeros` y `validarLongitud(valor, 6)`.
+- El campo solo acepta números: cualquier otro carácter que se escriba o pegue se elimina, y tiene `maxlength="6"`.
+- Si el número no cumple, aparece el mensaje "El número de control debe tener exactamente 6 dígitos".
+- Tampoco se permite registrar dos alumnos con el mismo número de control.
 
 ### 6. Modal de edad
 
+Al guardar un alumno con todos los datos válidos se abre un modal creado con la librería visual (`UIKit.modal`).
+
+- La edad se calcula con `calcularEdad` a partir de la fecha de nacimiento, y `esMayorEdad` decide si es mayor de 18 años.
+- El modal muestra el nombre del alumno, su edad y un aviso:
+  - verde: **"Es mayor de edad"**
+  - amarillo: **"Es menor de edad"**
+- Se cierra con el botón "Entendido", con la ×, haciendo clic fuera del modal o con la tecla `Esc`.
+- El nombre se escapa antes de mostrarse, para que no se pueda inyectar HTML.
+![alt text](img/readme/modal_edad.png)
 ---
 
 ## Flujo completo funcionando
 
+1. Abre `login.html`. A la izquierda se ve el carrusel de imágenes y a la derecha el formulario.
+2. Escribe un correo y una contraseña inválidos (por ejemplo `ana@` y `abc`): aparecen los errores en rojo y no se avanza.
+3. Escribe datos válidos, por ejemplo `ana.lopez@correo.com` y `Clave123!`, y pulsa **Entrar**. Se redirige a `index.html`.
+4. En el navbar aparece el nombre **Ana Lopez** a la derecha. Al hacer clic se despliega el menú con el correo y la opción **Salir del sistema**.
+5. Usa el botón hamburguesa para cerrar y abrir el sidebar.
+6. Abre **Usuarios → Captura** y registra un usuario con datos válidos. Aparece en la tabla y el contador de Inicio sube.
+7. En el formulario de alumnos prueba un número de control incorrecto (`12345`): se muestra el error. Luego usa uno válido (`123456`), escribe un nombre y elige una fecha de nacimiento.
+8. Al guardar se abre el modal de edad:
+   - con una fecha como `2000-01-01` indica **mayor de edad**;
+   - con una fecha como `2010-01-01` indica **menor de edad**.
+9. Pulsa **Salir del sistema**: se cierra la sesión y regresa a `login.html`. Si intentas abrir `index.html` directamente, te manda de nuevo al login.
 
----
+
 
 ## Cómo ejecutarlo
 
